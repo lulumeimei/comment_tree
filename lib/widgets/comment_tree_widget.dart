@@ -6,7 +6,8 @@ import 'package:comment_tree/widgets/tree_theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-typedef AvatarWidgetBuilder<T> = PreferredSize Function(BuildContext context, T value);
+typedef AvatarWidgetBuilder<T> = PreferredSize Function(
+    BuildContext context, T value);
 typedef ContentBuilder<T> = Widget Function(BuildContext context, T value);
 
 class CommentTreeWidget<R, C> extends StatefulWidget {
@@ -22,23 +23,20 @@ class CommentTreeWidget<R, C> extends StatefulWidget {
   final ContentBuilder<C> contentChild;
   final TreeThemeData treeThemeData;
 
-  CommentTreeWidget(
-      this.root,
-      this.replies,
-      {
-        this.treeThemeData = const TreeThemeData(lineColor: Colors.grey, lineWidth: 1),
-        this.avatarRoot,
-        this.contentRoot,
-        this.avatarChild,
-        this.contentChild
-      });
+  CommentTreeWidget(this.root, this.replies,
+      {this.treeThemeData =
+          const TreeThemeData(lineColor: Colors.grey, lineWidth: 1),
+      required this.avatarRoot,
+      required this.contentRoot,
+      required this.avatarChild,
+      required this.contentChild});
 
   @override
-  _CommentTreeWidgetState<R, C> createState() => _CommentTreeWidgetState<R, C>();
+  _CommentTreeWidgetState<R, C> createState() =>
+      _CommentTreeWidgetState<R, C>();
 }
 
 class _CommentTreeWidgetState<R, C> extends State<CommentTreeWidget<R, C>> {
-
   @override
   Widget build(BuildContext context) {
     PreferredSize avatarRoot = widget.avatarRoot(context, widget.root);
@@ -52,11 +50,12 @@ class _CommentTreeWidgetState<R, C> extends State<CommentTreeWidget<R, C>> {
               widget.contentRoot(context, widget.root),
             ),
             ...widget.replies.map((e) => CommentChildWidget(
-              isLast: widget.replies.indexOf(e) == (widget.replies.length - 1),
-              avatar: widget.avatarChild(context, e),
-              avatarRoot: avatarRoot.preferredSize,
-              content: widget.contentChild(context, e),
-            ))
+                  isLast:
+                      widget.replies.indexOf(e) == (widget.replies.length - 1),
+                  avatar: widget.avatarChild(context, e),
+                  avatarRoot: avatarRoot.preferredSize,
+                  content: widget.contentChild(context, e),
+                ))
           ],
         ),
       ),

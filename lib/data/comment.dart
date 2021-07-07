@@ -1,7 +1,5 @@
 import 'dart:developer' as developer;
 
-import 'package:flutter/material.dart';
-
 class Comment {
   static const TAG = 'Comment';
 
@@ -9,5 +7,6 @@ class Comment {
   String userName;
   String content;
 
-  Comment({@required this.avatar, @required this.userName, @required this.content});
+  Comment(
+      {required this.avatar, required this.userName, required this.content});
 }
